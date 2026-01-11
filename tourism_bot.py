@@ -1,5 +1,8 @@
+import streamlit as st
 import openai
-import os
+
+st.title("Tourism Bot")
+st.write("Ask me anything about tourism!")
 
 def ask_tourism_bot(question):
     client = openai.OpenAI(api_key="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")
@@ -12,12 +15,8 @@ def ask_tourism_bot(question):
     )
     return response.choices[0].message.content
 
-if __name__ == "__main__":
-    print("Welcome to the Tourism Bot! Ask me anything about tourism.")
-    while True:
-        user_input = input("You: ")
-        if user_input.lower() in ["exit", "quit"]:
-            print("Goodbye!")
-            break
+user_input = st.text_input("You:", "")
+if user_input:
+    with st.spinner("Thinking..."):
         answer = ask_tourism_bot(user_input)
-        print("Bot:", answer)
+    st.markdown(f"**Bot:** {answer}")
