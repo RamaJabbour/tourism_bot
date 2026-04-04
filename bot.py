@@ -1,4 +1,21 @@
+import os
+
 import openai
+
+
+def get_openai_api_key() -> str:
+    import streamlit as st
+
+    env_key = (os.environ.get("OPENAI_API_KEY") or "").strip()
+    if env_key:
+        return env_key
+    try:
+        secret = st.secrets["OPENAI_API_KEY"]
+        if secret:
+            return str(secret).strip()
+    except (KeyError, FileNotFoundError, TypeError):
+        pass
+    return ""
 
 
 def ask_tourism_bot(question: str, api_key: str) -> str:

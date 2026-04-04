@@ -1,3 +1,5 @@
+"""Alternate Streamlit entry (e.g. older Cloud apps); prefer `streamlit run app.py`."""
+
 import streamlit as st
 
 from bot import ask_tourism_bot, get_openai_api_key
